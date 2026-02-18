@@ -9,6 +9,13 @@ interface SessionFormProps {
     onSessionCreated?: () => void;
 }
 
+interface DurationOption {
+    value: number;
+    label: string;
+    level?: number;
+    locked: boolean;
+}
+
 export function SessionForm({ onSessionCreated }: SessionFormProps) {
     const [task, setTask] = useState("");
     const [duration, setDuration] = useState(5);
@@ -79,7 +86,7 @@ export function SessionForm({ onSessionCreated }: SessionFormProps) {
                     className="w-full rounded-lg border bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
                     disabled={isSubmitting}
                 >
-                    {durations?.map((d) => (
+                    {durations?.map((d: DurationOption) => (
                         <option key={d.value} value={d.value} disabled={d.locked}>
                             {d.label} {d.locked ? `🔒 (Level ${d.level})` : ""}
                         </option>
